@@ -1,5 +1,5 @@
 # could have added leading and trailing periods to avoid edge cases.... oh well
-# PART 1 
+# PART 1
 # first find out what special symbols are there in the document
 SYMBOLS = ""
 with open("./day3/input.txt", "r") as file:
@@ -12,9 +12,9 @@ with open("./day3/input.txt", "r") as file:
     for line in file_lines:
         for char in line:
             # print(char)
-            if char != "." and char != "\n" and char.isnumeric() == False and not char in SYMBOLS:
-                SYMBOLS += char 
-    
+            if char != "." and char != "\n" and char.isnumeric() is False and not char in SYMBOLS:
+                SYMBOLS += char
+
     print(SYMBOLS)
 
     sum = 0
@@ -44,15 +44,15 @@ with open("./day3/input.txt", "r") as file:
             elif char_index == LINE_LENGTH - 1:
                 prev_char = this_line[char_index - 1]
                 next_char = "."
-            else: 
+            else:
                 prev_char = this_line[char_index - 1]
                 next_char = this_line[char_index + 1]
 
             # get all the numbers from this line
             if this_char.isnumeric() is False:
                 if prev_char.isnumeric() is True:
-                    # if previous is numeric and this char is non-numeric, 
-                    # last char is the end of number, add number to list 
+                    # if previous is numeric and this char is non-numeric,
+                    # last char is the end of number, add number to list
                     line_numbers.append(current_num)
                     # end index of number
                     number_end = char_index - 1
@@ -70,14 +70,16 @@ with open("./day3/input.txt", "r") as file:
                         line_numbers.append(current_num)
                         # this is a single digit number, so start and end index are the same
                         number_start = number_end = char_index
-                        line_numbers_positions.append([number_start, number_end])
+                        line_numbers_positions.append(
+                            [number_start, number_end])
                     # if prev char is numeric, update number and add to list
                     elif prev_char.isnumeric() is True:
                         current_num += this_char
                         line_numbers.append(current_num)
                         # this is the end of number
                         number_end = char_index
-                        line_numbers_positions.append([number_start, number_end])
+                        line_numbers_positions.append(
+                            [number_start, number_end])
                 # if this is not the last character
                 else:
                     if prev_char.isnumeric() is True:
@@ -88,7 +90,7 @@ with open("./day3/input.txt", "r") as file:
                         current_num = this_char
                         # this is the start of number
                         number_start = char_index
-        
+
         print(line_numbers)
         print(line_numbers_positions)
 
@@ -104,7 +106,7 @@ with open("./day3/input.txt", "r") as file:
             # if it is a well behaved middle number
             if num_start_index != 0 and num_end_index != LINE_LENGTH - 1:
                 # adjacent chars from previous line and next line
-                for char_index in range(num_start_index-1, num_end_index + 2):                
+                for char_index in range(num_start_index-1, num_end_index + 2):
                     adj_chars += prev_line[char_index]
                     adj_chars += next_line[char_index]
                 # adjacent chars from current line
@@ -131,14 +133,3 @@ with open("./day3/input.txt", "r") as file:
             if special is True:
                 sum += this_num
     print(sum)
-            
-
-
-
-
-
-
-
-            
-
-
